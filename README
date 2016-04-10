@@ -1,0 +1,60 @@
+/**  CSci4061 F2015 Assignment 4  **/
+/**  Student: Zhexuan Zachary Yang & Yuanting Shao  **/
+/**  X500: yang4442 & shaox119  **/
+
+Machine used:
+server side: kh4250-12
+client side: kh4250-18, kh4250-20 
+
+Directory:
+src:        sources codes
+include:    header files
+client:     sources codes, header files and Makefile for client
+server:     sources codes, header files and Makefile for server
+
+
+Files:
+client/src:        alloc.c makeargv.c twitterTrendClient.c
+client/include:    alloc.h makeargv.h twitterTrendClient.h
+server/src:        makeargv.c twitterTrendServer.c
+server/include:    makeargv.h twitterTrendServer.h
+
+
+How to compile the program:
+use "make" to make executable file "twitterTrend_server" and 
+"twitterTrend_client" under corresponding folder
+
+
+How to run from Shell:
+./twitterTrend_server <portNumber> <numThreads>
+./twitterTrend_client <serverHostName> <serverPortNumber> <filePath>
+
+
+for example:
+./twitterTrend_server 3039 2 (in machine 0)
+./twitterTrend_client kh4250-18-cselabs.umn.edu 3039 client1.in (in machine 1)
+./twitterTrend_client kh4250-30-cselabs.umn.edu 3039 client2.in (in machine 2)
+
+
+Purpose:
+This program implements a multi-threaded twitterTrend server and twitterTrend 
+client. In this program, synchronization mechanisms is achieved by using mutex 
+lock and condition variable. Server's main thread creates a shared queue of 
+incoming clients' sockets, while each child thread gets, removes and handles 
+the clients concurrently. Client sends city names to the given server port 
+number throught network and receives corresponding key words. In case an 
+unrecognized or malformed message is received, the network connection will 
+terminate and an error message will be sent over to the other side of the 
+connection.
+
+
+Extra details:
+We did extra credits which means that, Client program can take an arbitrary 
+number of input files as the command line arguments instead of only one input 
+file.
+
+
+alloc.*:                new memory allocator.
+makeargv.*:             codes cited from textbook
+twitterTrendServer.*:   
+twitterTrendClient.*:   
